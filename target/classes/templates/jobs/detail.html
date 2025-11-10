@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<title>Job Detail</title>
+</head>
+<body>
+   <header class="container py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="h3"><a th:href="@{/}" class="text-decoration-none text-dark">JobConnect</a></h1>
+      
+      <nav>
+        <a th:href="@{/}" class="me-2">Home</a>
+        <a th:href="@{/jobs}" class="me-2">Jobs</a>
+        <a th:href="@{/register}" class="me-2">Register</a>
+        <a th:href="@{/login}" class="me-2">Login</a>
+      </nav>
+    </div>
+    <hr/>
+  </header>
+<div>
+  <h2 th:text="${job.title}">Job Title</h2>
+  <p th:text="${job.description}">Description</p>
+  <p>Location: <span th:text="${job.location}"></span></p>
+  <p>Salary: <span th:text="${job.salary}"></span></p>
+  <p>Deadline: <span th:text="${job.deadline}"></span></p>
+  <a th:href="@{/seeker/apply/{id}(id=${job.id})}">Apply</a>
+</div>
+</body>
+</html>

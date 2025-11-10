@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<title>Dashboard</title>
+</head>
+<body>
+   <header class="container py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="h3"><a th:href="@{/}" class="text-decoration-none text-dark">JobConnect</a></h1>
+      
+      <nav>
+        <a th:href="@{/}" class="me-2">Home</a>
+        <a th:href="@{/jobs}" class="me-2">Jobs</a>
+        <a th:href="@{/register}" class="me-2">Register</a>
+        <a th:href="@{/login}" class="me-2">Login</a>
+      </nav>
+    </div>
+    <hr/>
+  </header>
+<div>
+  <h2>Employer Dashboard</h2>
+  <a th:href="@{/employer/jobs/new}">Create Job</a>
+  <ul>
+    <li th:each="job : ${jobs}">
+      <span th:text="${job.title}">Title</span> -
+      <a th:href="@{/employer/jobs/edit/{id}(id=${job.id})}">Edit</a>
+      <form th:action="@{/employer/jobs/delete/{id}(id=${job.id})}" method="post" style="display:inline">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

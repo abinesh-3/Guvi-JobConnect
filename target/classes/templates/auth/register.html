@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<title>Register</title>
+</head>
+<body>
+   <header class="container py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="h3"><a th:href="@{/}" class="text-decoration-none text-dark">JobConnect</a></h1>
+      
+      <nav>
+        <a th:href="@{/}" class="me-2">Home</a>
+        <a th:href="@{/jobs}" class="me-2">Jobs</a>
+        <a th:href="@{/register}" class="me-2">Register</a>
+        <a th:href="@{/login}" class="me-2">Login</a>
+      </nav>
+    </div>
+    <hr/>
+  </header>
+<div>
+  <h2>Register</h2>
+  <form th:action="@{/register}" method="post" th:object="${user}">
+    <label>Full name: <input type="text" th:field="*{fullName}" required/></label><br/>
+    <label>Email: <input type="email" th:field="*{email}" required/></label><br/>
+    <label>Password: <input type="password" th:field="*{password}" required/></label><br/>
+    <label>Phone: <input type="text" th:field="*{phone}"/></label><br/>
+    <label>Role:
+      <select name="role">
+        <option value="JOB_SEEKER">Job Seeker</option>
+        <option value="EMPLOYER">Employer</option>
+      </select>
+    </label><br/>
+    <button type="submit">Register</button>
+  </form>
+</div>
+</body>
+</html>
