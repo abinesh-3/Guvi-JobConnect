@@ -4,26 +4,22 @@ FROM eclipse-temurin:21-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper files first (for dependency caching)
+# Copy Maven config and source
 COPY pom.xml .
+COPY src ./src
 
-# Make mvnw executable
-RUN chmod +x mvnw
+# Install Maven
+RUN apt-get update && apt-get install -y maven
 
-# Download dependencies (cached)
-RUN ./mvnw dependency:go-offline
-
-# Copy the rest of the project
-COPY . .
-
-# Fix permissions again
-RUN chmod +x mvnw
+# Download dependencies
+RUN mvn dependency:go-offline
 
 # Build the JAR
-RUN ./mvnw -B -DskipTests clean package
+RUN mvn -B -DskipTests clean package spring-boot:repackage
+
 
 # Expose the application port
 EXPOSE 8080
 
-# Step 5: Run the Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java -jar target/*.jar"]
+
